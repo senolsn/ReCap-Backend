@@ -29,10 +29,10 @@ namespace DataAccess.Concrete.InMemory
             _cars.Add(car);
         }
 
-        public void Delete(Car car)
+        public void Delete(int id)
         {
 
-            Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+            Car carToDelete = _cars.SingleOrDefault(c => c.Id == id);
             _cars.Remove(carToDelete);
         }
 

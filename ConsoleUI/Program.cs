@@ -21,7 +21,7 @@ namespace ConsoleUI
             Console.WriteLine("Delete Methodu Çalıştırıldı");
             Console.WriteLine("------------------------");
 
-            carManager.Delete(new Car() { Id = 5, });
+            carManager.Delete(5);
             foreach (var c in carManager.GetAll())
             {
                 Console.WriteLine(c.Description);

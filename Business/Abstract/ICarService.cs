@@ -12,7 +12,7 @@ namespace Business.Abstract
         List<Car> GetAll();
         Car GetById(int id);
         void Add(Car car);
-        void Delete(Car car);
+        void Delete(int id);
         void Update(Car car);
     }
 }

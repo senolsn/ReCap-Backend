@@ -23,9 +23,9 @@ namespace Business.Concrete
             _carDal.Add(car);
         }
 
-        public void Delete(Car car)
+        public void Delete(int id)
         {
-            _carDal.Delete(car);
+            _carDal.Delete(id);
         }
 
         public List<Car> GetAll()
