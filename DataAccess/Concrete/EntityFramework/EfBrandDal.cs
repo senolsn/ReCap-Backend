@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +14,53 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Brand entity)
         {
-            throw new NotImplementedException();
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
+                context.SaveChanges();
+
+            }
         }
 
         public void Delete(Brand entity)
         {
-            throw new NotImplementedException();
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                var deletedEntity = context.Entry(entity);
+                deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+
+            }
         }
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                return context.Set<Brand>().SingleOrDefault(filter);
+            }
         }
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                return filter == null
+                    ? context.Set<Brand>().ToList()
+                    : context.Set<Brand>().Where(filter).ToList();
+            }
         }
 
         public void Update(Brand entity)
         {
-            throw new NotImplementedException();
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                var updatedEntity = context.Entry(entity);
+                updatedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
+
+            }
         }
     }
 }
