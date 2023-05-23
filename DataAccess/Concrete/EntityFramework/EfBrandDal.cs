@@ -57,7 +57,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (MSSQLContext context = new MSSQLContext())
             {
                 var updatedEntity = context.Entry(entity);
-                updatedEntity.State = EntityState.Deleted;
+                updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
 
             }
