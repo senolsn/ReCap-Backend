@@ -19,5 +19,7 @@ namespace Business.Constants
         public static string ItemNotRemoved = "Item removed failed";
         public static string ItemNotUpdated = "Item updated failed";
         public static string ItemNotListed = "Item listed failed.";
+
+        public static string CustomerNotFound = "Customer Not Found !";
     }
 }
