@@ -21,10 +21,17 @@ namespace ConsoleUI
 
             //AddRental();
 
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Update(new Rental() { Id=4,ReturnDate = DateTime.Now,CarId=1,CustomerId=2,RentDate=DateTime.Now});
-            Console.WriteLine(rentalManager.GetById(4).Data.ReturnDate);
+            //RentalUpdate();
 
+          
+
+        }
+
+        private static void RentalUpdate()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Update(new Rental() { Id = 4, ReturnDate = DateTime.Now, CarId = 1, CustomerId = 2, RentDate = DateTime.Now });
+            Console.WriteLine(rentalManager.GetById(4).Data.ReturnDate);
         }
 
         private static void AddRental()
@@ -69,17 +76,17 @@ namespace ConsoleUI
             return userManager;
         }
 
-        private static void CarDtoTest()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
+        //private static void CarDtoTest()
+        //{
+        //    CarManager carManager = new CarManager(new EfCarDal());
 
-            foreach (var cars in carManager.GetCarDetails().Data)
-            {
-                Console.WriteLine("Araç : {0} Marka : {1} Renk : {2}", cars.Description, cars.BrandName, cars.ColorName);
-            }
+        //    foreach (var cars in carManager.GetCarDetails().Data)
+        //    {
+        //        Console.WriteLine("Araç : {0} Marka : {1} Renk : {2}", cars.Description, cars.BrandName, cars.ColorName);
+        //    }
 
-            Console.WriteLine(carManager.GetCarDetails().Success);
-        }
+        //    Console.WriteLine(carManager.GetCarDetails().Success);
+        //}
 
         //private static void CarGetById()
         //{
