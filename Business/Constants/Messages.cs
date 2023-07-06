@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Business.Constants
 {
-    public static class Message
+    public static class Messages
     {
         public static string MaintenanceTime = "The system is in maintenance.";
         public static string ItemAdded = "Added successfully";
@@ -21,5 +22,13 @@ namespace Business.Constants
         public static string ItemNotListed = "Item listed failed.";
 
         public static string CustomerNotFound = "Customer Not Found !";
+
+        public static string? AuthorizationDenied = "Access Denied ";
+        public static string UserRegistered = "User Registered !";
+        public static string AccessTokenCreated = "Access Token Created Successfully";
+        public static string UserAlreadyExists = "User is already exists";
+        public static string SuccessfulLogin = "Login Successfully";
+        public static string PasswordError = "Password invalid";
+        public static string UserNotFound = "User Not Found !";
     }
 }

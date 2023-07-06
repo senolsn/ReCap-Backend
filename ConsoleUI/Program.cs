@@ -27,54 +27,54 @@ namespace ConsoleUI
 
         }
 
-        private static void RentalUpdate()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Update(new Rental() { Id = 4, ReturnDate = DateTime.Now, CarId = 1, CustomerId = 2, RentDate = DateTime.Now });
-            Console.WriteLine(rentalManager.GetById(4).Data.ReturnDate);
-        }
+        //private static void RentalUpdate()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    rentalManager.Update(new Rental() { Id = 4, ReturnDate = DateTime.Now, CarId = 1, CustomerId = 2, RentDate = DateTime.Now });
+        //    Console.WriteLine(rentalManager.GetById(4).Data.ReturnDate);
+        //}
 
-        private static void AddRental()
-        {
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            rentalManager.Add(new Rental() { CarId = 1, CustomerId = 2, RentDate = DateTime.Now });
-        }
+        //private static void AddRental()
+        //{
+        //    RentalManager rentalManager = new RentalManager(new EfRentalDal());
+        //    rentalManager.Add(new Rental() { CarId = 1, CustomerId = 2, RentDate = DateTime.Now });
+        //}
 
-        private static void ListCustomer()
-        {
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            foreach (var customer in customerManager.GetAll().Data)
-            {
-                Console.WriteLine(customer.CompanyName);
-            }
-        }
+        //private static void ListCustomer()
+        //{
+        //    CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+        //    foreach (var customer in customerManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine(customer.CompanyName);
+        //    }
+        //}
 
-        private static void AddCustomer()
-        {
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
-            customerManager.Add(new Customer() { UserId = 1, CompanyName = "Yildiz Hukuk" });
-            customerManager.Add(new Customer() { UserId = 3, CompanyName = "Sehriyar Restaurant" });
-        }
+        //private static void AddCustomer()
+        //{
+        //    CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+        //    customerManager.Add(new Customer() { UserId = 1, CompanyName = "Yildiz Hukuk" });
+        //    customerManager.Add(new Customer() { UserId = 3, CompanyName = "Sehriyar Restaurant" });
+        //}
 
-        private static void ListUserMethod()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine(user.FirstName);
-            }
-        }
+        //private static void ListUserMethod()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    foreach (var user in userManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine(user.FirstName);
+        //    }
+        //}
 
-        private static UserManager AddUserMethod()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            userManager.Add(new User() { FirstName = "Senol", LastName = "Sen", Email = "senol@mail.com", Password = "123" });
-            userManager.Add(new User() { FirstName = "Melike", LastName = "Yildiz", Email = "melike@mail.com", Password = "123" });
-            userManager.Add(new User() { FirstName = "Cemal", LastName = "Furkan", Email = "cefuok@mail.com", Password = "123" });
-            userManager.Add(new User() { FirstName = "Emrecan", LastName = "Ay", Email = "emre@mail.com", Password = "123" });
-            userManager.Add(new User() { FirstName = "Saban", LastName = "Donmez", Email = "saban@mail.com", Password = "123" });
-            return userManager;
-        }
+        //private static UserManager AddUserMethod()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    userManager.Add(new User() { FirstName = "Senol", LastName = "Sen", Email = "senol@mail.com", Password = "123" });
+        //    userManager.Add(new User() { FirstName = "Melike", LastName = "Yildiz", Email = "melike@mail.com", Password = "123" });
+        //    userManager.Add(new User() { FirstName = "Cemal", LastName = "Furkan", Email = "cefuok@mail.com", Password = "123" });
+        //    userManager.Add(new User() { FirstName = "Emrecan", LastName = "Ay", Email = "emre@mail.com", Password = "123" });
+        //    userManager.Add(new User() { FirstName = "Saban", LastName = "Donmez", Email = "saban@mail.com", Password = "123" });
+        //    return userManager;
+        //}
 
         //private static void CarDtoTest()
         //{
