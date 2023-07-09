@@ -52,7 +52,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.Id == id), Messages.ItemListed);
         }
 
-        public IDataResult<List<RentalDetailDto>> GetRentalDtoDetails()
+        public IDataResult<List<RentalDetailDto>> GetRentalsDetails()
         {
             return new SuccessDataResult<List<RentalDetailDto>>(_rentalDal.GetRentalsDetails());
         }
