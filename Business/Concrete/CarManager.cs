@@ -72,7 +72,7 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarsDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), Messages.ItemListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDetails(), Messages.ItemListed);
         }
     }
 }
