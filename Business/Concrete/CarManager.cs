@@ -7,11 +7,7 @@ using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Business.Concrete
 {
@@ -78,6 +74,16 @@ namespace Business.Concrete
         public IDataResult<CarDetailDto> GetCarDetail(int carId)
         {
             return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetail(carId),Messages.ItemListed);
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsDtoByBrandId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDtoByBrandId(id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarsDtoByColorId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarsDtoByColorId(id));
         }
     }
 }

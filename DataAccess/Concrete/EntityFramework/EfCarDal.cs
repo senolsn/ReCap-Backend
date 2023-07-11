@@ -54,5 +54,60 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
+
+        public List<CarDetailDto> GetCarsDtoByBrandId(int id)
+        {
+            using (var context = new MSSQLContext())
+            {
+                var result = from ca in context.Cars
+                             join br in context.Brands on ca.BrandId equals br.BrandId
+                             join co in context.Colors on ca.ColorId equals co.ColorId
+                             join ci in context.CarImages on ca.Id equals ci.CarId into carImages
+                             from ci in carImages.DefaultIfEmpty()
+                             where br.BrandId == id
+                             select new CarDetailDto
+                             {
+                                 CarId = ca.Id,
+                                 BrandId = ca.BrandId,
+                                 BrandName = br.BrandName,
+                                 ColorId = ca.ColorId,
+                                 ColorName = co.ColorName,
+                                 ModelYear = ca.ModelYear,
+                                 DailyPrice = ca.DailyPrice,
+                                 Description = ca.Description,
+                                 ImagePath = ci.ImagePath
+                             };
+
+                return result.ToList();
+            }
+        }
+
+        public List<CarDetailDto> GetCarsDtoByColorId(int id)
+        {
+            using (var context = new MSSQLContext())
+            {
+                var result = from ca in context.Cars
+                             join br in context.Brands on ca.BrandId equals br.BrandId
+                             join co in context.Colors on ca.ColorId equals co.ColorId
+                             join ci in context.CarImages on ca.Id equals ci.CarId into carImages
+                             from ci in carImages.DefaultIfEmpty()
+                             where co.ColorId == id
+                             select new CarDetailDto
+                             {
+                                 CarId = ca.Id,
+                                 BrandId = ca.BrandId,
+                                 BrandName = br.BrandName,
+                                 ColorId = ca.ColorId,
+                                 ColorName = co.ColorName,
+                                 ModelYear = ca.ModelYear,
+                                 DailyPrice = ca.DailyPrice,
+                                 Description = ca.Description,
+                                 ImagePath = ci.ImagePath
+                             };
+
+                return result.ToList();
+            }
+        }
+
     }
 }
