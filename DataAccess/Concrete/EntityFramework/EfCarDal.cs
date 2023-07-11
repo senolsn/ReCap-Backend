@@ -14,6 +14,27 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, MSSQLContext>, ICarDal
     {
+        public CarDetailDto GetCarDetail(int carId)
+        {
+            using (MSSQLContext context = new MSSQLContext())
+            {
+                var result = from car in context.Cars
+                             join brand in context.Brands on car.BrandId equals brand.BrandId
+                             join color in context.Colors on car.ColorId equals color.ColorId
+                             where car.Id == carId
+                             select new CarDetailDto()
+                             {
+                                 CarId = car.Id,
+                                 Description = car.Description,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                             };
+                return result.FirstOrDefault();
+            }
+        }
+
         public List<CarDetailDto> GetCarsDetails()
         {
             using (MSSQLContext context = new MSSQLContext())
@@ -21,7 +42,15 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from car in context.Cars
                              join brand in context.Brands on car.BrandId equals brand.BrandId
                              join color in context.Colors on car.ColorId equals color.ColorId
-                             select new CarDetailDto() { CarId = car.Id, Description = car.Description, BrandName = brand.BrandName, ColorName = color.ColorName };
+                             select new CarDetailDto()
+                             {
+                                 CarId = car.Id,
+                                 Description = car.Description,
+                                 BrandName = brand.BrandName,
+                                 ColorName = color.ColorName,
+                                 DailyPrice = car.DailyPrice,
+                                 ModelYear = car.ModelYear,
+                             };
                 return result.ToList();
             }
         }

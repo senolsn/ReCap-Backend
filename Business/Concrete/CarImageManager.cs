@@ -58,11 +58,16 @@ namespace Business.Concrete
         public IDataResult<List<CarImage>> GetByCarId(int carId)
         {
             var result = BusinessRules.Run(CheckCarImage(carId));
-            if (!result.Success)
+            if(result == null) 
+            {
+                return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
+            }
+            else
             {
                 return new ErrorDataResult<List<CarImage>>(GetDefaultCarImage(carId).Data);
             }
-            return new SuccessDataResult<List<CarImage>>(_carImageDal.GetAll(c => c.CarId == carId));
+                
+            
 
         }
 
@@ -92,8 +97,15 @@ namespace Business.Concrete
         private IDataResult<List<CarImage>> GetDefaultCarImage(int carId)
         {
             List<CarImage> carImages = new List<CarImage>();
-            carImages.Add(new CarImage { CarId = carId, Date = DateTime.Now, ImagePath = "auto-car-logo-template-vector-icon.jpg" });
-            return new SuccessDataResult<List<CarImage>>(carImages);
+            var defaultCarImage = new CarImage {CarId = carId,Date = DateTime.Now,ImagePath= PathConstants.ImagesPath};
+            carImages.Add(defaultCarImage);
+            var result = new SuccessDataResult<List<CarImage>>(carImages);
+            if (result.Data == null)
+            {
+                return new SuccessDataResult<List<CarImage>>(new List<CarImage> { defaultCarImage });
+            }
+
+            return result;
         }
         private IResult CheckCarImage(int carId)
         {

@@ -30,5 +30,7 @@ namespace Business.Constants
         public static string SuccessfulLogin = "Login Successfully";
         public static string PasswordError = "Password invalid";
         public static string UserNotFound = "User Not Found !";
+
+        public static string CarImageAdded = "Car Image Added !";
     }
 }
