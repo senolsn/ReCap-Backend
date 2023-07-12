@@ -42,15 +42,28 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from car in context.Cars
                              join brand in context.Brands on car.BrandId equals brand.BrandId
                              join color in context.Colors on car.ColorId equals color.ColorId
-                             select new CarDetailDto()
+                             join carImage in context.CarImages on car.Id equals carImage.CarId into carImagesGroup
+                             from carImage in carImagesGroup.DefaultIfEmpty()
+                             group carImage by new
                              {
-                                 CarId = car.Id,
-                                 Description = car.Description,
-                                 BrandName = brand.BrandName,
-                                 ColorName = color.ColorName,
-                                 DailyPrice = car.DailyPrice,
-                                 ModelYear = car.ModelYear,
+                                 car.Id,
+                                 car.Description,
+                                 brand.BrandName,
+                                 color.ColorName,
+                                 car.DailyPrice,
+                                 car.ModelYear
+                             } into g
+                             select new CarDetailDto
+                             {
+                                 CarId = g.Key.Id,
+                                 Description = g.Key.Description,
+                                 BrandName = g.Key.BrandName,
+                                 ColorName = g.Key.ColorName,
+                                 DailyPrice = g.Key.DailyPrice,
+                                 ModelYear = g.Key.ModelYear,
+                                 ImagePath = g.Select(c => c.ImagePath).FirstOrDefault()
                              };
+
                 return result.ToList();
             }
         }
