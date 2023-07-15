@@ -21,21 +21,37 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from car in context.Cars
                              join brand in context.Brands on car.BrandId equals brand.BrandId
                              join color in context.Colors on car.ColorId equals color.ColorId
-                             join ci in context.CarImages on car.Id equals ci.CarId
+                             join carImage in context.CarImages on car.Id equals carImage.CarId into carImagesGroup
+                             from carImage in carImagesGroup.DefaultIfEmpty()
                              where car.Id == carId
-                             select new CarDetailDto()
+                             group carImage by new
                              {
-                                 CarId = car.Id,
-                                 Description = car.Description,
-                                 BrandName = brand.BrandName,
-                                 ColorName = color.ColorName,
-                                 DailyPrice = car.DailyPrice,
-                                 ModelYear = car.ModelYear,
-                                 ImagePath = ci.ImagePath
+                                 car.Id,
+                                 car.Description,
+                                 brand.BrandName,
+                                 color.ColorName,
+                                 car.DailyPrice,
+                                 car.ModelYear,
+                                 brand.BrandId,
+                                 color.ColorId
+                             } into g
+                             select new CarDetailDto
+                             {
+                                 CarId = g.Key.Id,
+                                 Description = g.Key.Description,
+                                 BrandName = g.Key.BrandName,
+                                 ColorName = g.Key.ColorName,
+                                 DailyPrice = g.Key.DailyPrice,
+                                 ModelYear = g.Key.ModelYear,
+                                 ImagePath = g.Select(c => c.ImagePath).FirstOrDefault(),
+                                 BrandId = g.Key.BrandId,
+                                 ColorId = g.Key.ColorId
                              };
+
                 return result.FirstOrDefault();
             }
         }
+
 
         public List<CarDetailDto> GetCarsDetails()
         {
@@ -51,7 +67,9 @@ namespace DataAccess.Concrete.EntityFramework
                                  car.Id,
                                  car.Description,
                                  brand.BrandName,
+                                 brand.BrandId, // Ekledik
                                  color.ColorName,
+                                 color.ColorId, // Ekledik
                                  car.DailyPrice,
                                  car.ModelYear
                              } into g
@@ -59,7 +77,9 @@ namespace DataAccess.Concrete.EntityFramework
                              {
                                  CarId = g.Key.Id,
                                  Description = g.Key.Description,
+                                 BrandId = g.Key.BrandId, // Ekledik
                                  BrandName = g.Key.BrandName,
+                                 ColorId = g.Key.ColorId, // Ekledik
                                  ColorName = g.Key.ColorName,
                                  DailyPrice = g.Key.DailyPrice,
                                  ModelYear = g.Key.ModelYear,
