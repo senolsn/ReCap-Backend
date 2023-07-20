@@ -67,7 +67,7 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-
+        app.ConfigureCustomExceptionMiddleware();
         app.UseStaticFiles();
         app.UseHttpsRedirection();
         app.UseCors(MyAllowSpecificOrigins);
