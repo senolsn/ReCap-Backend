@@ -21,7 +21,11 @@ internal class Program
         {
             options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
             {
-                policy.WithOrigins(MyAllowSpecificOrigins).AllowAnyHeader();
+                policy.WithOrigins(MyAllowSpecificOrigins)
+                .AllowAnyHeader()
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .WithMethods("PUT", "DELETE", "GET");
             });
         });
 

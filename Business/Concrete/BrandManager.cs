@@ -25,7 +25,7 @@ namespace Business.Concrete
         }
 
         [ValidationAspect(typeof(BrandValidator))]
-        //[SecuredOperation("")]
+        [SecuredOperation("admin,car.add,moderator")]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
